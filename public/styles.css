@@ -30,6 +30,7 @@ div.landing {
   width: 70%;
   position: relative;
   right: -25%;
+  min-height: 200px;
 }
 
 .quote h2 {
@@ -38,11 +39,20 @@ div.landing {
   right: 150px;
 }
 
-.home-nav {
-  display: inline-block;
-  position: absolute;
-  top: 20%;
-  left: 25%;
+.menubar {
+  display: block;
+  font-size: 30px;
+}
+
+.display-table {
+  width: 90%;
+}
+
+th,
+td {
+  text-align: right;
+  padding: 20px 0;
+  font-size: 20px;
 }
 
 div.home ul {

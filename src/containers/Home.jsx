@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import Display from '../components/Display';
+import MenuBar from '../components/MenuBar';
 
 class Home extends Component {
   state = {
     quote: '',
-    display: ''
+    display: 'Food Log'
   };
 
   componentDidMount() {
@@ -41,7 +42,7 @@ class Home extends Component {
   chooseDisplay = e => {
     e.preventDefault();
     this.setState({
-      display: e.target.value
+      display: e.target.innerHTML
     });
   };
 
@@ -49,35 +50,7 @@ class Home extends Component {
     return (
       <div className="home">
         {this.formatQuote(this.state.quote)}
-        <ul className="home-nav">
-          <li>
-            <a
-              role="menuitem"
-              tabIndex="0"
-              onClick={e => this.chooseDisplay(e)}
-            >
-              Goals
-            </a>
-          </li>
-          <li>
-            <a
-              role="menuitem"
-              tabIndex="0"
-              onClick={e => this.chooseDisplay(e)}
-            >
-              Food Log
-            </a>
-          </li>
-          <li>
-            <a
-              role="menuitem"
-              tabIndex="0"
-              onClick={e => this.chooseDisplay(e)}
-            >
-              Workout Tracker
-            </a>
-          </li>
-        </ul>
+        <MenuBar chooseDisplay={this.chooseDisplay} />
         <Display display={this.state.display} />
       </div>
     );
