@@ -4,13 +4,31 @@ html {
 
 body {
   margin: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-width: 100%;
 }
 
-.landing {
+div.landing {
   border: 5px solid black;
   border-radius: 10px;
   width: 25%;
   text-align: center;
-  margin: 0 auto;
+  position: absolute;
+  top: 38.5%;
+  left: 40%;
+  vertical-align: middle;
+  background-color: #cdced3;
+}
+
+.quote {
+  float: right;
+  padding: 50px 50px;
+}
+
+.quote h2 {
+  text-align: right;
+  padding: 0 10px;
 }
 
