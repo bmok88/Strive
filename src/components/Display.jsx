@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Goals from './Goals';
-import FoodLog from './FoodLog';
+import FoodLog from '../containers/FoodLog';
 import WorkoutTracker from './WorkoutTracker';
 
 const Display = ({ display }) => {

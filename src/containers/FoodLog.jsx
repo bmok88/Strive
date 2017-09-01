@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-const NutritionixAppID = 'a2af49ca';
-const NutritionixAppKey = '6c84a67850803b4cdf0d5cd5c8bf91e5';
+import Food from '../components/Food';
+
+let foodId = 0;
 
 class FoodLog extends Component {
   state = {
@@ -13,12 +14,15 @@ class FoodLog extends Component {
     e.preventDefault();
     const url = 'https://trackapi.nutritionix.com/v2/natural/nutrients';
     const headers = {
-      'x-app-id': NutritionixAppID,
-      'x-app-key': NutritionixAppKey,
+      'x-app-id': 'a2af49ca',
+      'x-app-key': '6c84a67850803b4cdf0d5cd5c8bf91e5',
       'x-remote-user-id': '0'
     };
+
+    const query = `${this.gramsInput.value} ${this.foodInput.value}`;
+    console.log(query);
     const data = {
-      query: this.foodInput.value,
+      query,
       timezone: 'US/Western'
     };
     const method = 'post';
@@ -29,12 +33,17 @@ class FoodLog extends Component {
       headers,
       data
     })
-      .then(result => console.log(result))
+      .then(result => {
+        const oldState = this.state.foods.slice();
+        const foodItem = result.data.foods[0];
+        console.log(foodItem);
+        this.setState({
+          foods: [...oldState, foodItem]
+        });
+      })
       .catch(error => console.error(error));
-    // axios
-    //   .post(url, data, headers)
-    //   .then(result => console.log(result))
-    //   .catch(error => console.error(error));
+    this.foodInput.value = '';
+    this.gramsInput.value = '';
   };
 
   render() {
@@ -43,9 +52,17 @@ class FoodLog extends Component {
         <form onSubmit={e => this.handleFoodSubmit(e)}>
           <input
             type="text"
-            placeholder="Enter what you ate and how much"
+            placeholder="Enter what you ate"
             ref={value => {
               this.foodInput = value;
+            }}
+            required
+          />
+          <input
+            type="text"
+            placeholder="How much did you eat?"
+            ref={value => {
+              this.gramsInput = value;
             }}
             required
           />
@@ -57,20 +74,16 @@ class FoodLog extends Component {
               <th>Item</th>
               <th>Amount(g)</th>
               <th>Calories</th>
-              <th>Fat(g)</th>
+              <th>Total Fat(g)</th>
               <th>Carbohydrates(g)</th>
               <th>Protein(g)</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Avocado</td>
-              <td>150</td>
-              <td>200</td>
-              <td>30</td>
-              <td>8</td>
-              <td>7</td>
-            </tr>
+            {this.state.foods.map(food => {
+              foodId += 1;
+              return <Food key={foodId} {...food} />;
+            })}
           </tbody>
         </table>
       </div>
