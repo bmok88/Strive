@@ -22,13 +22,49 @@ div.landing {
   background-color: #cdced3;
 }
 
+.home {
+  width: 100%;
+}
+
 .quote {
-  float: right;
-  padding: 50px 50px;
+  width: 70%;
+  position: relative;
+  right: -25%;
 }
 
 .quote h2 {
-  text-align: right;
   padding: 0 10px;
+  position: absolute;
+  right: 150px;
 }
 
+.home-nav {
+  display: inline-block;
+  position: absolute;
+  top: 20%;
+  left: 25%;
+}
+
+div.home ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+div.home ul li {
+  float: left;
+}
+
+div.home ul li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+div.home ul li a:hover {
+  background-color: #111;
+}
