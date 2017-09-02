@@ -2,12 +2,20 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import Food from '../components/Food';
+import Totals from '../components/Totals';
+import AddFood from '../components/AddFood';
+import FoodTableHeaders from '../components/FoodTableHeaders';
 
 let foodId = 0;
 
 class FoodLog extends Component {
   state = {
-    foods: []
+    foods: [],
+    totalCalories: 0,
+    totalFat: 0,
+    totalProtein: 0,
+    totalCarbs: 0,
+    totalAmount: 0
   };
 
   handleFoodSubmit = e => {
@@ -18,9 +26,8 @@ class FoodLog extends Component {
       'x-app-key': '6c84a67850803b4cdf0d5cd5c8bf91e5',
       'x-remote-user-id': '0'
     };
+    const query = `${e.target.children[0].value} ${e.target.children[1].value}`;
 
-    const query = `${this.gramsInput.value} ${this.foodInput.value}`;
-    console.log(query);
     const data = {
       query,
       timezone: 'US/Western'
@@ -32,58 +39,48 @@ class FoodLog extends Component {
       method,
       headers,
       data
-    })
-      .then(result => {
-        const oldState = this.state.foods.slice();
-        const foodItem = result.data.foods[0];
-        console.log(foodItem);
-        this.setState({
-          foods: [...oldState, foodItem]
-        });
-      })
-      .catch(error => console.error(error));
-    this.foodInput.value = '';
-    this.gramsInput.value = '';
+    }).then(result => {
+      const oldState = this.state.foods.slice();
+      const foodItem = result.data.foods[0];
+      const totalCalories = this.state.totalCalories + foodItem.nf_calories;
+      const totalFat = this.state.totalFat + foodItem.nf_total_fat;
+      const totalProtein = this.state.totalProtein + foodItem.nf_protein;
+      const totalCarbs = this.state.totalCarbs + foodItem.nf_total_carbohydrate;
+      const totalAmount =
+        this.state.totalAmount + foodItem.serving_weight_grams;
+
+      this.setState({
+        foods: [...oldState, foodItem],
+        totalCalories,
+        totalFat,
+        totalProtein,
+        totalCarbs,
+        totalAmount
+      });
+    });
+    e.target.children[0].value = '';
+    e.target.children[1].value = '';
   };
 
   render() {
     return (
-      <div>
-        <form onSubmit={e => this.handleFoodSubmit(e)}>
-          <input
-            type="text"
-            placeholder="Enter what you ate"
-            ref={value => {
-              this.foodInput = value;
-            }}
-            required
-          />
-          <input
-            type="text"
-            placeholder="How much did you eat?"
-            ref={value => {
-              this.gramsInput = value;
-            }}
-            required
-          />
-          <input type="submit" />
-        </form>
-        <table className="display-table">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Amount(g)</th>
-              <th>Calories</th>
-              <th>Total Fat(g)</th>
-              <th>Carbohydrates(g)</th>
-              <th>Protein(g)</th>
-            </tr>
-          </thead>
+      <div className="foodLog">
+        <AddFood handleFoodSubmit={this.handleFoodSubmit} />
+        <div className="foodDay">Your food log for:</div>
+        <table className="foodTable">
+          <FoodTableHeaders />
           <tbody>
             {this.state.foods.map(food => {
               foodId += 1;
               return <Food key={foodId} {...food} />;
             })}
+            <Totals
+              totalAmount={this.state.totalAmount}
+              totalCalories={this.state.totalCalories}
+              totalFat={this.state.totalFat}
+              totalCarbs={this.state.totalCarbs}
+              totalProtein={this.state.totalProtein}
+            />
           </tbody>
         </table>
       </div>

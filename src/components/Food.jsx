@@ -1,9 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Food = props => {
-  console.log(props);
   const foodName = props.food_name;
-  const servingSize = props.serving_weight_grams / props.serving_qty;
   const amount = props.serving_weight_grams;
   const calories = props.nf_calories;
   const totalFat = props.nf_total_fat;
@@ -20,6 +19,15 @@ const Food = props => {
       <td>{protein}</td>
     </tr>
   );
+};
+
+Food.propTypes = {
+  food_name: PropTypes.string.isRequired,
+  serving_weight_grams: PropTypes.number.isRequired,
+  nf_calories: PropTypes.number.isRequired,
+  nf_total_fat: PropTypes.number.isRequired,
+  nf_total_carbohydrate: PropTypes.number.isRequired,
+  nf_protein: PropTypes.number.isRequired
 };
 
 export default Food;
