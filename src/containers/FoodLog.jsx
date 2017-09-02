@@ -4,6 +4,7 @@ import axios from 'axios';
 import Food from '../components/Food';
 import Totals from '../components/Totals';
 import AddFood from '../components/AddFood';
+import FoodLogDay from '../components/FoodLogDay';
 import FoodTableHeaders from '../components/FoodTableHeaders';
 
 let foodId = 0;
@@ -15,7 +16,8 @@ class FoodLog extends Component {
     totalFat: 0,
     totalProtein: 0,
     totalCarbs: 0,
-    totalAmount: 0
+    totalAmount: 0,
+    date: new Date().toDateString()
   };
 
   handleFoodSubmit = e => {
@@ -62,11 +64,18 @@ class FoodLog extends Component {
     e.target.children[1].value = '';
   };
 
+  handleDayChange = e => {
+    e.preventDefault();
+  };
+
   render() {
     return (
       <div className="foodLog">
         <AddFood handleFoodSubmit={this.handleFoodSubmit} />
-        <div className="foodDay">Your food log for:</div>
+        <FoodLogDay
+          handleDayChange={this.handleDayChange}
+          date={this.state.date}
+        />
         <table className="foodTable">
           <FoodTableHeaders />
           <tbody>
