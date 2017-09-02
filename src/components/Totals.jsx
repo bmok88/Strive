@@ -2,10 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Totals = props => (
-  <tr>
-    <td>
-      <strong>Totals</strong>
-    </td>
+  <tr className="foodTotals">
+    <td>Totals</td>
     <td>{props.totalAmount}</td>
     <td>{props.totalCalories}</td>
     <td>{props.totalFat}</td>

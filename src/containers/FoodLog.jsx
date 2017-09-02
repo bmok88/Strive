@@ -17,7 +17,7 @@ class FoodLog extends Component {
     totalProtein: 0,
     totalCarbs: 0,
     totalAmount: 0,
-    date: new Date().toDateString()
+    date: new Date()
   };
 
   handleFoodSubmit = e => {
@@ -64,8 +64,25 @@ class FoodLog extends Component {
     e.target.children[1].value = '';
   };
 
-  handleDayChange = e => {
+  handleDayChange = (e, action) => {
     e.preventDefault();
+    const today = this.state.date;
+
+    if (action === 'next') {
+      today.setDate(today.getDate() + 1);
+    } else {
+      today.setDate(today.getDate() - 1);
+    }
+
+    this.setState({
+      foods: [],
+      totalCalories: 0,
+      totalFat: 0,
+      totalProtein: 0,
+      totalCarbs: 0,
+      totalAmount: 0,
+      date: today
+    });
   };
 
   render() {
@@ -81,7 +98,7 @@ class FoodLog extends Component {
           <tbody>
             {this.state.foods.map(food => {
               foodId += 1;
-              return <Food key={foodId} {...food} />;
+              return <Food key={foodId} {...food} date={this.state.date} />;
             })}
             <Totals
               totalAmount={this.state.totalAmount}

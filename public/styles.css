@@ -84,13 +84,15 @@ div.home ul li a:hover {
 }
 
 .foodTable {
-  width: 90%;
+  min-width: 80%;
+  max-width: 80%;
 }
 
 .foodDay {
-  width: 40%;
+  width: 46%;
   float: left;
   font-size: 30px;
+  padding: 20px 0 0 10px;
 }
 
 .addFood input {
@@ -105,7 +107,44 @@ div.home ul li a:hover {
 }
 
 #date {
-  height: 50px;
   text-align: center;
-  font-size: 55px;
+  font-size: 60px;
+  line-height: 10px;
+  padding-top: 55px;
+  min-width: 580px;
+}
+
+#date a img {
+  padding: 0 5px;
+}
+
+.foodTableHeaders th {
+  font-size: 30px;
+}
+
+.foodTotals td {
+  font-size: 25px;
+}
+
+#goalTable {
+  width: 100%;
+}
+
+.goalTableHeaders th {
+  width: 10%;
+  text-align: center;
+}
+
+#goal-col {
+  width: 30%;
+  text-align: center;
+}
+
+.goalRow td {
+  width: 10%;
+  text-align: center;
+}
+
+a {
+  outline: none;
 }

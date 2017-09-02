@@ -7,7 +7,7 @@ import MenuBar from '../components/MenuBar';
 class Home extends Component {
   state = {
     quote: '',
-    display: 'Food Log'
+    display: 'Goals'
   };
 
   componentDidMount() {

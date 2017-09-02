@@ -2,7 +2,7 @@ import React from 'react';
 
 const FoodTableHeaders = () => (
   <thead>
-    <tr>
+    <tr className="foodTableHeaders">
       <th>Item</th>
       <th>Amount(g)</th>
       <th>Calories</th>

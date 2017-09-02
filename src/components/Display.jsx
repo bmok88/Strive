@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Goals from './Goals';
+import Goals from '../containers/Goals';
 import FoodLog from '../containers/FoodLog';
 import WorkoutTracker from './WorkoutTracker';
 
