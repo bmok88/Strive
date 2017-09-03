@@ -1,13 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Goal = ({
-  goal,
-  goalId,
-  handleEditGoal,
-  handleEditState,
-  isEditingGoal
-}) => {
+const Goal = ({ goal, goalId, handleEdit, handleEditState, isEditingGoal }) => {
   if (!isEditingGoal) {
     return (
       <td id="goal-column">
@@ -22,11 +16,11 @@ const Goal = ({
     <td>
       <form
         onSubmit={e => {
-          handleEditGoal(e, goalId, this.input.value);
+          handleEdit(e, goalId, e.target.children[0].value, 'goal');
           handleEditState('goal');
         }}
       >
-        <input type="text" ref={node => (this.input = node)} />
+        <input type="text" />
       </form>
     </td>
   );
@@ -35,7 +29,7 @@ const Goal = ({
 Goal.propTypes = {
   goal: PropTypes.string.isRequired,
   goalId: PropTypes.number.isRequired,
-  handleEditGoal: PropTypes.func.isRequired,
+  handleEdit: PropTypes.func.isRequired,
   handleEditState: PropTypes.func.isRequired,
   isEditingGoal: PropTypes.bool.isRequired
 };

@@ -30,7 +30,7 @@ class GoalRow extends Component {
       goal,
       goalId,
       handleGoalComplete,
-      handleEditGoal,
+      handleEdit,
       priority
     } = this.props;
 
@@ -42,14 +42,14 @@ class GoalRow extends Component {
         <Goal
           goal={goal}
           goalId={goalId}
-          handleEditGoal={handleEditGoal}
+          handleEdit={handleEdit}
           handleEditState={this.handleEditState}
           isEditingGoal={this.state.isEditingGoal}
         />
         <Priority
           priority={priority}
           goalId={goalId}
-          handleEditGoal={handleEditGoal}
+          handleEdit={handleEdit}
           handleEditState={this.handleEditState}
           isEditingPriority={this.state.isEditingPriority}
         />

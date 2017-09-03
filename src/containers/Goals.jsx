@@ -45,12 +45,12 @@ class Goals extends Component {
     });
   };
 
-  handleEditGoal = (e, goalId, edit) => {
+  handleEdit = (e, goalId, edit, col) => {
     e.preventDefault();
     console.log(this.state.goals, 'state goals');
     const editedGoals = this.state.goals.map(goal => {
       if (goalId === goal.goalId) {
-        goal.goal = edit;
+        goal[col] = edit;
       }
 
       return goal;
@@ -73,7 +73,7 @@ class Goals extends Component {
                   key={goal.goalId}
                   {...goal}
                   handleGoalComplete={this.handleGoalComplete}
-                  handleEditGoal={this.handleEditGoal}
+                  handleEdit={this.handleEdit}
                 />
               );
             })}
