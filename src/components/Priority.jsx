@@ -1,25 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Goal = ({ goal, goalId, handleEditGoal }) => (
-  <td id="goal-column">
-    <a role="button" tabIndex="0" onClick={e => handleEditGoal(e, 'goal')}>
-      {goal}
+const Priority = ({ priority, goalId, handleEditGoal }) => (
+  <td>
+    <a role="button" tabIndex="0" onClick={e => handleEditGoal(e, 'priority')}>
+      {priority}
     </a>
   </td>
 );
 
-Goal.propTypes = {
-  goal: PropTypes.string.isRequired,
+Priority.propTypes = {
+  priority: PropTypes.string.isRequired,
   goalId: PropTypes.number.isRequired,
   handleEditGoal: PropTypes.func.isRequired
 };
 
-export default Goal;
+export default Priority;
 
 // <form
 //               onSubmit={e => {
-//                 handleEditGoal(e, goalId, 'goal');
+//                 handleEditGoal(e, goalId, 'priority');
 //                 this.handleEditState('');
 //               }}
 //             >

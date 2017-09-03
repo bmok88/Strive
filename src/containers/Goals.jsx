@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import AddGoal from '../components/AddGoal';
-import Goal from '../components/Goal';
+import GoalRow from './GoalRow';
 import GoalTableHeaders from '../components/GoalTableHeaders';
 
 class Goals extends Component {
@@ -16,7 +16,6 @@ class Goals extends Component {
     const priority = document.querySelector('input[name="priority"]:checked')
       .value;
     const goalId = this.state.goalId + 1;
-    console.log('goalId', goalId);
     const newGoal = {
       goalId,
       goal,
@@ -45,6 +44,20 @@ class Goals extends Component {
     });
   };
 
+  handleEditGoal = (e, goalId, edit) => {
+    e.preventDefault();
+    const editedGoals = this.state.gaols.map(goal => {
+      if (goalId === goal.goalId) {
+        goal.goal = edit;
+      }
+
+      return goal;
+    });
+    this.setState({
+      goals: editedGoals
+    });
+  };
+
   render() {
     return (
       <div>
@@ -54,10 +67,11 @@ class Goals extends Component {
           <tbody>
             {this.state.goals.map(goal => {
               return (
-                <Goal
+                <GoalRow
                   key={goal.goalId}
                   {...goal}
                   handleGoalComplete={this.handleGoalComplete}
+                  handleEditGoal={this.handleEditGoal}
                 />
               );
             })}
