@@ -3,11 +3,13 @@ import React, { Component } from 'react';
 import AddGoal from '../components/AddGoal';
 import GoalRow from './GoalRow';
 import GoalTableHeaders from '../components/GoalTableHeaders';
+import FooterFilters from '../components/FooterFilters';
 
 class Goals extends Component {
   state = {
     goals: [],
-    goalId: 0
+    goalId: 0,
+    visibleGoals: []
   };
 
   handleGoalSubmit = e => {
@@ -25,7 +27,8 @@ class Goals extends Component {
 
     this.setState({
       goalId,
-      goals: [...this.state.goals, newGoal]
+      goals: [...this.state.goals, newGoal],
+      visibleGoals: [...this.state.visibleGoals, newGoal]
     });
   };
 
@@ -47,16 +50,46 @@ class Goals extends Component {
 
   handleEdit = (e, goalId, edit, col) => {
     e.preventDefault();
-    console.log(this.state.goals, 'state goals');
     const editedGoals = this.state.goals.map(goal => {
       if (goalId === goal.goalId) {
-        goal[col] = edit;
+        if (col === 'priority') {
+          goal[col] = edit.toLowerCase();
+        } else {
+          goal[col] = edit;
+        }
       }
+      console.log(goal);
 
       return goal;
     });
     this.setState({
-      goals: editedGoals
+      goals: editedGoals,
+      visibleGoals: editedGoals
+    });
+  };
+
+  handleFilter = (e, filterTerm) => {
+    e.preventDefault();
+    const goals = this.state.goals;
+    let filteredGoals;
+    console.log('filterTerm', filterTerm, goals);
+    if (filterTerm === 'All') {
+      filteredGoals = goals.filter(goal => goal);
+    } else if (filterTerm === 'Completed') {
+      filteredGoals = goals.filter(goal => goal.achieved);
+    } else if (filterTerm === 'Incomplete') {
+      filteredGoals = goals.filter(goal => !goal.achieved);
+    } else if (filterTerm === 'high') {
+      filteredGoals = goals.filter(goal => goal.priority === 'high');
+    } else if (filterTerm === 'mid') {
+      filteredGoals = goals.filter(goal => goal.priority === 'mid');
+    } else {
+      console.log(goals);
+      filteredGoals = goals.filter(goal => goal.priority === 'low');
+    }
+    console.log('filteredgoals', filteredGoals);
+    this.setState({
+      visibleGoals: filteredGoals
     });
   };
 
@@ -67,7 +100,7 @@ class Goals extends Component {
         <table id="goalTable">
           <GoalTableHeaders />
           <tbody>
-            {this.state.goals.map(goal => {
+            {this.state.visibleGoals.map(goal => {
               return (
                 <GoalRow
                   key={goal.goalId}
@@ -79,6 +112,7 @@ class Goals extends Component {
             })}
           </tbody>
         </table>
+        <FooterFilters handleFilter={this.handleFilter} />
       </div>
     );
   }

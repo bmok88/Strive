@@ -147,4 +147,15 @@ div.home ul li a:hover {
 
 a {
   outline: none;
+  text-decoration: none;
+  color: black;
+}
+
+#footerFilters {
+  font-size: 30px;
+}
+
+#footerFilters a {
+  padding: 0 10px;
+  font-size: 30px;
 }

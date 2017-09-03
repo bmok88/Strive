@@ -24,14 +24,20 @@ const Priority = ({
 
   return (
     <td>
-      <form
-        onSubmit={e => {
-          handleEdit(e, goalId, e.target.children[0].value, 'priority');
+      <select
+        onChange={e => {
+          handleEdit(e, goalId, e.target.value, 'priority');
           handleEditState('priority');
         }}
       >
-        <input type="text" />
-      </form>
+        <option disabled selected value>
+          {' '}
+          -- select an option --{' '}
+        </option>
+        <option value="High">High</option>
+        <option value="Mid">Mid</option>
+        <option value="Low">Low</option>
+      </select>
     </td>
   );
 };
@@ -46,6 +52,7 @@ Priority.propTypes = {
 
 export default Priority;
 
+// <input type="text" />
 // <form
 //               onSubmit={e => {
 //                 handleEditGoal(e, goalId, 'priority');

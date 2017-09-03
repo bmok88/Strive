@@ -70,7 +70,7 @@ GoalRow.propTypes = {
   priority: PropTypes.string.isRequired,
   achieved: PropTypes.bool.isRequired,
   handleGoalComplete: PropTypes.func.isRequired,
-  handleEditGoal: PropTypes.func.isRequired
+  handleEdit: PropTypes.func.isRequired
 };
 
 export default GoalRow;
