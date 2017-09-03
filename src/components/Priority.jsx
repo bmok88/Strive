@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 
 const Priority = ({ priority, goalId, handleEditGoal }) => (
   <td>
-    <a role="button" tabIndex="0" onClick={e => handleEditGoal(e, 'priority')}>
+    <a
+      role="button"
+      tabIndex="0"
+      onClick={e => handleEditGoal(e, goalId, 'priority')}
+    >
       {priority}
     </a>
   </td>

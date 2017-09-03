@@ -31,6 +31,7 @@ class Goals extends Component {
 
   handleGoalComplete = (e, goalId) => {
     e.preventDefault();
+
     const completedGoals = this.state.goals.map(goal => {
       // console.log('goalId', goal);
       if (goalId === goal.goalId) {
@@ -46,7 +47,8 @@ class Goals extends Component {
 
   handleEditGoal = (e, goalId, edit) => {
     e.preventDefault();
-    const editedGoals = this.state.gaols.map(goal => {
+    console.log(this.state.goals, 'state goals');
+    const editedGoals = this.state.goals.map(goal => {
       if (goalId === goal.goalId) {
         goal.goal = edit;
       }

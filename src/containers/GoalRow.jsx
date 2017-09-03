@@ -8,8 +8,20 @@ import Priority from '../components/Priority';
 
 class GoalRow extends Component {
   state = {
-    isEditing: 'false',
-    which: ''
+    isEditingGoal: false,
+    isEditingPriority: false
+  };
+
+  handleEditState = col => {
+    if (col === 'goal') {
+      this.setState({
+        isEditingGoal: !this.state.isEditingGoal
+      });
+    } else {
+      this.setState({
+        isEditingPriority: !this.state.isEditingPriority
+      });
+    }
   };
 
   render() {
@@ -27,11 +39,19 @@ class GoalRow extends Component {
         className="goalRow"
         style={{ textDecoration: !achieved ? 'none' : 'line-through' }}
       >
-        <Goal goal={goal} goalId={goalId} handleEditGoal={handleEditGoal} />
+        <Goal
+          goal={goal}
+          goalId={goalId}
+          handleEditGoal={handleEditGoal}
+          handleEditState={this.handleEditState}
+          isEditingGoal={this.state.isEditingGoal}
+        />
         <Priority
           priority={priority}
           goalId={goalId}
           handleEditGoal={handleEditGoal}
+          handleEditState={this.handleEditState}
+          isEditingPriority={this.state.isEditingPriority}
         />
         <Achieved
           achieved={achieved}
