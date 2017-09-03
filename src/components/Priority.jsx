@@ -51,13 +51,3 @@ Priority.propTypes = {
 };
 
 export default Priority;
-
-// <input type="text" />
-// <form
-//               onSubmit={e => {
-//                 handleEditGoal(e, goalId, 'priority');
-//                 this.handleEditState('');
-//               }}
-//             >
-//               <input type="text" />
-//             </form>

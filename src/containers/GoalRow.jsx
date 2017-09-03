@@ -31,7 +31,8 @@ class GoalRow extends Component {
       goalId,
       handleGoalComplete,
       handleEdit,
-      priority
+      priority,
+      handleDelete
     } = this.props;
 
     return (
@@ -58,7 +59,7 @@ class GoalRow extends Component {
           goalId={goalId}
           handleGoalComplete={handleGoalComplete}
         />
-        <Delete />
+        <Delete goalId={goalId} handleDelete={handleDelete} />
       </tr>
     );
   }
@@ -70,91 +71,8 @@ GoalRow.propTypes = {
   priority: PropTypes.string.isRequired,
   achieved: PropTypes.bool.isRequired,
   handleGoalComplete: PropTypes.func.isRequired,
-  handleEdit: PropTypes.func.isRequired
+  handleEdit: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired
 };
 
 export default GoalRow;
-// handleEditState = column => {
-//   // this.setState({
-//   //   isEditing: !this.state.isEditing,
-//   //   which: column
-//   // });
-// };
-// handleEditClick = () => {
-//   const { handleEditGoal, goal, goalId, priority } = this.props;
-//   console.log(this.state.isEditing, 'editing?');
-//   if (!this.state.isEditing) {
-//     return (
-
-//         <td id="goal-column">
-//           <a
-//             role="button"
-//             tabIndex="0"
-//             onClick={this.handleEditState('goal')}
-//           >
-//             {goal}
-//           </a>
-//         </td>
-//         <td>
-//           <a
-//             role="button"
-//             tabIndex="0"
-//             onClick={this.handleEditState('priority')}
-//           >
-//             {priority}
-//           </a>
-//         </td>
-
-//     );
-//   }
-
-//   if (this.state.which === 'goal') {
-//     return (
-//       <div>
-//         <td id="goal-column">
-//           <form
-//             onSubmit={e => {
-//               handleEditGoal(e, goalId, 'goal');
-//               this.handleEditState('');
-//             }}
-//           >
-//             <input type="text" />
-//           </form>
-//         </td>
-//         <td>
-//           <a
-//             role="button"
-//             tabIndex="0"
-//             onClick={this.handleEditState('priority')}
-//           >
-//             {priority}
-//           </a>
-//         </td>
-//       </div>
-//     );
-//   } else {
-//     return (
-//       <div>
-//         <td id="goal-column">
-//           <a
-//             role="button"
-//             tabIndex="0"
-//             onClick={this.handleEditState('goal')}
-//           >
-//             {goal}
-//           </a>
-//         </td>
-//         <td>
-//           <form
-//             onSubmit={e => {
-//               handleEditGoal(e, goalId, 'priority');
-//               this.handleEditState('');
-//             }}
-//           >
-//             <input type="text" />
-//           </form>
-//         </td>
-//       </div>
-//     );
-//   }
-// };

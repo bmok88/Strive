@@ -30,15 +30,16 @@ class Goals extends Component {
       goals: [...this.state.goals, newGoal],
       visibleGoals: [...this.state.visibleGoals, newGoal]
     });
+    e.target.children[0].value = '';
   };
 
   handleGoalComplete = (e, goalId) => {
     e.preventDefault();
-
     const completedGoals = this.state.goals.map(goal => {
-      // console.log('goalId', goal);
       if (goalId === goal.goalId) {
+        /* eslint-disable */
         goal.achieved = !goal.achieved;
+        /* eslint-enable */
       }
 
       return goal;
@@ -52,13 +53,14 @@ class Goals extends Component {
     e.preventDefault();
     const editedGoals = this.state.goals.map(goal => {
       if (goalId === goal.goalId) {
+        /* eslint-disable */
         if (col === 'priority') {
           goal[col] = edit.toLowerCase();
         } else {
           goal[col] = edit;
+          /* eslint-enable */
         }
       }
-      console.log(goal);
 
       return goal;
     });
@@ -72,7 +74,7 @@ class Goals extends Component {
     e.preventDefault();
     const goals = this.state.goals;
     let filteredGoals;
-    console.log('filterTerm', filterTerm, goals);
+
     if (filterTerm === 'All') {
       filteredGoals = goals.filter(goal => goal);
     } else if (filterTerm === 'Completed') {
@@ -84,12 +86,22 @@ class Goals extends Component {
     } else if (filterTerm === 'mid') {
       filteredGoals = goals.filter(goal => goal.priority === 'mid');
     } else {
-      console.log(goals);
       filteredGoals = goals.filter(goal => goal.priority === 'low');
     }
-    console.log('filteredgoals', filteredGoals);
+
     this.setState({
       visibleGoals: filteredGoals
+    });
+  };
+
+  handleDelete = (e, goalId) => {
+    e.preventDefault();
+    const nonDeletedGoals = this.state.goals.filter(
+      goal => goal.goalId !== goalId
+    );
+    this.setState({
+      goals: nonDeletedGoals,
+      visibleGoals: nonDeletedGoals
     });
   };
 
@@ -100,16 +112,15 @@ class Goals extends Component {
         <table id="goalTable">
           <GoalTableHeaders />
           <tbody>
-            {this.state.visibleGoals.map(goal => {
-              return (
-                <GoalRow
-                  key={goal.goalId}
-                  {...goal}
-                  handleGoalComplete={this.handleGoalComplete}
-                  handleEdit={this.handleEdit}
-                />
-              );
-            })}
+            {this.state.visibleGoals.map(goal => (
+              <GoalRow
+                key={goal.goalId}
+                {...goal}
+                handleGoalComplete={this.handleGoalComplete}
+                handleEdit={this.handleEdit}
+                handleDelete={this.handleDelete}
+              />
+            ))}
           </tbody>
         </table>
         <FooterFilters handleFilter={this.handleFilter} />

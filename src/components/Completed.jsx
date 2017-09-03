@@ -2,12 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Completed = ({ handleFilter }) => (
-  <a
-    href="#"
-    role="button"
-    tabIndex="0"
-    onClick={e => handleFilter(e, 'Completed')}
-  >
+  <a role="button" tabIndex="0" onClick={e => handleFilter(e, 'Completed')}>
     Completed
   </a>
 );
